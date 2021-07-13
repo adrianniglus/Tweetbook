@@ -1,0 +1,12 @@
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\bin\Debug\net5.0\TweetBook.Contracts.deps.json
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\bin\Debug\net5.0\TweetBook.Contracts.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\bin\Debug\net5.0\ref\TweetBook.Contracts.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\bin\Debug\net5.0\TweetBook.Contracts.pdb
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.csproj.AssemblyReference.cache
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.AssemblyInfoInputs.cache
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.AssemblyInfo.cs
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\ref\TweetBook.Contracts.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Contracts\obj\Debug\net5.0\TweetBook.Contracts.pdb
