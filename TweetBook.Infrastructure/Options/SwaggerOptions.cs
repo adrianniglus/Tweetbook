@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TweetBook.Options
+﻿namespace TweetBook.Infrastructure.Options
 {
     public class SwaggerOptions
     {

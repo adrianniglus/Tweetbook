@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TweetBook.Domain.Entities;
-using Mapster;
-using TweetBook.Infrastructure.DTO;
 using TweetBook.Contracts.V1.Requests;
 using TweetBook.Data;
-using Microsoft.EntityFrameworkCore;
+using TweetBook.Infrastructure.DTO;
 
 namespace TweetBook.Infrastructure.Services
 {
@@ -64,6 +60,10 @@ namespace TweetBook.Infrastructure.Services
         public async Task<bool> DeletePostAsync(Guid postId)
         {
             var post = await GetPostByIdAsync(postId);
+
+            if (post == null)
+                return false;
+
             _dataContext.Posts.Remove(post);
             var deleted = await _dataContext.SaveChangesAsync();
 

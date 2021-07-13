@@ -38,7 +38,6 @@ C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Iden
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -77,3 +76,4 @@ C:\Projects\NickTutorial\TweetBook\TweetBook.Api\obj\Debug\net5.0\TweetBook.Api.
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\obj\Debug\net5.0\TweetBook.Api.genruntimeconfig.cache
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Mapster.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Mapster.Core.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

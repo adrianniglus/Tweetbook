@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Requests;
 using TweetBook.Contracts.V1.Responses;
@@ -9,21 +9,22 @@ using TweetBook.Infrastructure.Services;
 
 namespace TweetBook.Controllers.V1
 {
+    
     public class PostsController : Controller
     {
         private readonly IPostService _postService;
-
         public PostsController(IPostService postService)
         {
             _postService = postService;
         }
+
 
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.Get)]
         public async Task<IActionResult> Get([FromRoute] Guid postId)
         {
             var post = await _postService.GetPostByIdAsync(postId);
 
-            if(post == null)
+            if (post == null)
             {
                 return NotFound();
             }
@@ -31,8 +32,8 @@ namespace TweetBook.Controllers.V1
             return Ok(post);
         }
 
-        
 
+        
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.GetAll)]
         public async Task<IActionResult> GetAll()
         {
@@ -42,26 +43,26 @@ namespace TweetBook.Controllers.V1
         [HttpPost(Contracts.V1.ApiRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
         {
-            
 
-            if (postRequest.Id == Guid.Empty)
-                postRequest.Id = Guid.NewGuid();
+
+
+            var postId = Guid.NewGuid();
 
             if (string.IsNullOrWhiteSpace(postRequest.Name))
                 postRequest.Name = "Example name";
 
-            await _postService.CreatePostAsync(postRequest.Id, postRequest.Name);
+            await _postService.CreatePostAsync(postId, postRequest.Name);
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Posts.Get.Replace("{postId}", postRequest.Id.ToString());
+            var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Posts.Get.Replace("{postId}", postId.ToString());
 
             var response = new PostResponse
             {
-                Id = postRequest.Id,
+                Id = postId,
                 Name = postRequest.Name
 
             };
-            
-            return Created(locationUri,response);
+
+            return Created(locationUri, response);
         }
 
         [HttpPut(TweetBook.Contracts.V1.ApiRoutes.Posts.Update)]
