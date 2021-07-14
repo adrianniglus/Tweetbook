@@ -12,5 +12,6 @@ namespace TweetBook.Data
         }
 
         public DbSet<PostDTO> Posts { get; set; }
+        public DbSet<RefreshTokenDTO> RefreshTokens {get; set;}
     }
 }

@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TweetBook.Data;
 
 namespace TweetBook
 {
@@ -7,7 +10,16 @@ namespace TweetBook
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+
+                dbContext.Database.Migrate();
+            }
+
+                host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

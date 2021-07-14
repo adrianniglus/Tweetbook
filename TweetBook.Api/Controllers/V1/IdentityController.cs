@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Requests;
 using TweetBook.Contracts.V1.Responses;
+using TweetBook.Infrastructure.DTO;
 using TweetBook.Infrastructure.Services;
 
 namespace TweetBook.Api.Controllers.V1
@@ -20,7 +21,7 @@ namespace TweetBook.Api.Controllers.V1
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
         {
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new AuthFailedResponse
                 {
@@ -28,26 +29,30 @@ namespace TweetBook.Api.Controllers.V1
                 });
             }
             var authResponse = await _identityService.RegisterAsync(request.Email, request.Password);
-
-            if(!authResponse.Success)
-            {
-                return BadRequest(new AuthFailedResponse
-                {
-                    Errors = authResponse.Errors
-                });
-            }
-
-            return Ok( new AuthSuccessResponse 
-            {
-                Token = authResponse.Token
-            });
+            return ValidateAuthResponse(authResponse);
         }
+
+        
 
         [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Identity.Login)]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
             var authResponse = await _identityService.LoginAsync(request.Email, request.Password);
 
+            return ValidateAuthResponse(authResponse);
+        }
+
+        [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Identity.Refresh)]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+        {
+            var authResponse = await _identityService.RefreshTokenAsync(request.Token, request.RefreshToken);
+
+            return ValidateAuthResponse(authResponse);
+
+        }
+
+        private IActionResult ValidateAuthResponse(AuthenticationResultDTO authResponse)
+        {
             if (!authResponse.Success)
             {
                 return BadRequest(new AuthFailedResponse
@@ -58,7 +63,8 @@ namespace TweetBook.Api.Controllers.V1
 
             return Ok(new AuthSuccessResponse
             {
-                Token = authResponse.Token
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
             });
         }
     }

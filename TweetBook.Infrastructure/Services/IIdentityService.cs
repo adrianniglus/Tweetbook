@@ -8,6 +8,6 @@ namespace TweetBook.Infrastructure.Services
     {
         Task<AuthenticationResultDTO> RegisterAsync(string email, string password);
         Task<AuthenticationResultDTO> LoginAsync(string email, string password);
-
+        Task<AuthenticationResultDTO> RefreshTokenAsync(string token, string refreshToken);
     }
 }

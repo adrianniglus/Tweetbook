@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TweetBook.Domain.Entities
 {
@@ -6,6 +7,6 @@ namespace TweetBook.Domain.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-
+        
     }
 }

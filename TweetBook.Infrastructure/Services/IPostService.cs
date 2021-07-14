@@ -10,8 +10,9 @@ namespace TweetBook.Infrastructure.Services
     {
         Task<List<PostDTO>> GetPostsAsync();
         Task<PostDTO> GetPostByIdAsync(Guid postId);
-        Task<bool> CreatePostAsync(Guid postId, string name);
-        Task<bool> UpdatePostAsync(Guid postId, UpdatePostRequest request);
+        Task<bool> CreatePostAsync(PostDTO post);
+        Task<bool> UpdatePostAsync(PostDTO post);
         Task<bool> DeletePostAsync(Guid postId);
+        Task<bool> UserOwnsPostAsync(Guid postId, string userId);
     }
 }

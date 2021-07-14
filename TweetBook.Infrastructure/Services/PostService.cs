@@ -26,13 +26,9 @@ namespace TweetBook.Infrastructure.Services
         public async Task<List<PostDTO>> GetPostsAsync()
             => await _dataContext.Posts.ToListAsync();
 
-        public async Task<bool> CreatePostAsync(Guid postId, string name)
+        public async Task<bool> CreatePostAsync(PostDTO post)
         {
-            var post = new PostDTO
-            {
-                Id = postId,
-                Name = name
-            };
+            
 
             await _dataContext.Posts.AddAsync(post);
             var created = await _dataContext.SaveChangesAsync();
@@ -43,13 +39,9 @@ namespace TweetBook.Infrastructure.Services
         }
 
 
-        public async Task<bool> UpdatePostAsync(Guid postId, UpdatePostRequest postRequest)
+        public async Task<bool> UpdatePostAsync(PostDTO post)
         {
-            var post = new PostDTO
-            {
-                Id = postId,
-                Name = postRequest.Name
-            };
+            
 
             _dataContext.Posts.Update(post);
             var updated = await _dataContext.SaveChangesAsync();
@@ -71,5 +63,20 @@ namespace TweetBook.Infrastructure.Services
 
         }
 
+        public async Task<bool> UserOwnsPostAsync(Guid postId, string userId)
+        {
+            var post = await _dataContext.Posts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == postId);
+
+            if(post == null)
+            {
+                return false;
+            }
+
+            if(post.UserId != userId)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
