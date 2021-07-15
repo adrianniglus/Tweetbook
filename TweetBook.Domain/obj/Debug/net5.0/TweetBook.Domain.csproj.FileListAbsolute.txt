@@ -9,4 +9,3 @@ C:\Projects\NickTutorial\TweetBook\TweetBook.Domain\obj\Debug\net5.0\TweetBook.D
 C:\Projects\NickTutorial\TweetBook\TweetBook.Domain\obj\Debug\net5.0\TweetBook.Domain.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Domain\obj\Debug\net5.0\ref\TweetBook.Domain.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Domain\obj\Debug\net5.0\TweetBook.Domain.pdb
-C:\Projects\NickTutorial\TweetBook\TweetBook.Domain\obj\Debug\net5.0\TweetBook.Domain.csproj.AssemblyReference.cache

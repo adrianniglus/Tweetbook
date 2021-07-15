@@ -51,7 +51,7 @@ namespace TweetBook.Api.Controllers.V1
 
         }
 
-        private IActionResult ValidateAuthResponse(AuthenticationResultDTO authResponse)
+        private IActionResult ValidateAuthResponse(AuthenticationResult authResponse)
         {
             if (!authResponse.Success)
             {

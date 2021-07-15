@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TweetBook.Data;
 
 namespace TweetBook.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210715080842_Added_Tags")]
+    partial class Added_Tags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,7 +221,7 @@ namespace TweetBook.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.Post", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.PostDTO", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -238,7 +240,7 @@ namespace TweetBook.Data.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.RefreshToken", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.RefreshTokenDTO", b =>
                 {
                     b.Property<string>("Token")
                         .ValueGeneratedOnAdd()
@@ -269,9 +271,9 @@ namespace TweetBook.Data.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.Tag", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.TagDTO", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("Tag")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -281,7 +283,7 @@ namespace TweetBook.Data.Migrations
                     b.Property<string>("TagName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Tag");
 
                     b.HasIndex("PostId");
 
@@ -339,7 +341,7 @@ namespace TweetBook.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.Post", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.PostDTO", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -348,7 +350,7 @@ namespace TweetBook.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.RefreshToken", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.RefreshTokenDTO", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -357,9 +359,9 @@ namespace TweetBook.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.Tag", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.TagDTO", b =>
                 {
-                    b.HasOne("TweetBook.Domain.Entities.Post", "Post")
+                    b.HasOne("TweetBook.Infrastructure.DTO.PostDTO", "Post")
                         .WithMany("Tags")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -368,7 +370,7 @@ namespace TweetBook.Data.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("TweetBook.Domain.Entities.Post", b =>
+            modelBuilder.Entity("TweetBook.Infrastructure.DTO.PostDTO", b =>
                 {
                     b.Navigation("Tags");
                 });

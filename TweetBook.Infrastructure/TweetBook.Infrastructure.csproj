@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TweetBook.Contracts\TweetBook.Contracts.csproj" />
     <ProjectReference Include="..\TweetBook.Domain\TweetBook.Domain.csproj" />
   </ItemGroup>
 

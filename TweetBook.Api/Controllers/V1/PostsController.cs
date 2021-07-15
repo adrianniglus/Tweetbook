@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Requests;
 using TweetBook.Contracts.V1.Responses;
 using TweetBook.Infrastructure.DTO;
 using TweetBook.Infrastructure.Extensions;
 using TweetBook.Infrastructure.Services;
+using Mapster;
 
 namespace TweetBook.Controllers.V1
 {
@@ -48,9 +50,9 @@ namespace TweetBook.Controllers.V1
         {
             var post = new PostDTO
             {
-                //Id = Guid.NewGuid(),
                 Name = postRequest.Name,
-                UserId = HttpContext.GetUserId()
+                UserId = HttpContext.GetUserId(),
+                Tags = postRequest.Tags.Adapt<List<TagDTO>>()
             };
 
 
@@ -112,5 +114,7 @@ namespace TweetBook.Controllers.V1
 
             return NotFound();
         }
+
+
     }
 }

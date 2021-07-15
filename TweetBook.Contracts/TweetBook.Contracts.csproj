@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TweetBook.Infrastructure\TweetBook.Infrastructure.csproj" />
+  </ItemGroup>
+
   
 
 </Project>

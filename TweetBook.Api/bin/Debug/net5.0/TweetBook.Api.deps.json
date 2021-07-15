@@ -1449,6 +1449,9 @@
         }
       },
       "TweetBook.Contracts/1.0.0": {
+        "dependencies": {
+          "TweetBook.Infrastructure": "1.0.0"
+        },
         "runtime": {
           "TweetBook.Contracts.dll": {}
         },
@@ -1457,6 +1460,9 @@
         }
       },
       "TweetBook.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7"
+        },
         "runtime": {
           "TweetBook.Domain.dll": {}
         },
@@ -1472,7 +1478,6 @@
           "Microsoft.AspNetCore.Identity.UI": "5.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.7",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.7",
-          "TweetBook.Contracts": "1.0.0",
           "TweetBook.Domain": "1.0.0"
         },
         "runtime": {

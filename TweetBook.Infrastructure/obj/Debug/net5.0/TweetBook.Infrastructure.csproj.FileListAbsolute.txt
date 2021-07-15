@@ -13,8 +13,6 @@ C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\obj\Debug\net5.0\Twe
 C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\obj\Debug\net5.0\TweetBook.Infrastructure.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\obj\Debug\net5.0\ref\TweetBook.Infrastructure.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\obj\Debug\net5.0\TweetBook.Infrastructure.pdb
-C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\bin\Debug\net5.0\TweetBook.Contracts.dll
-C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\bin\Debug\net5.0\TweetBook.Contracts.pdb
 C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\bin\Debug\net5.0\TweetBook.Infrastructure.runtimeconfig.json
 C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\bin\Debug\net5.0\TweetBook.Infrastructure.runtimeconfig.dev.json
 C:\Projects\NickTutorial\TweetBook\TweetBook.Infrastructure\obj\Debug\net5.0\TweetBook.Infrastructure.genruntimeconfig.cache

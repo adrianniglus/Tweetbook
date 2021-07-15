@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TweetBook.Domain.Entities;
 using TweetBook.Infrastructure.DTO;
 
 namespace TweetBook.Data
@@ -11,7 +13,14 @@ namespace TweetBook.Data
         {
         }
 
-        public DbSet<PostDTO> Posts { get; set; }
-        public DbSet<RefreshTokenDTO> RefreshTokens {get; set;}
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<RefreshToken> RefreshTokens {get; set;}
+        public DbSet<Tag> Tags { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

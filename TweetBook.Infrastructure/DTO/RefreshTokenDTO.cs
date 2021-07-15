@@ -11,8 +11,6 @@ namespace TweetBook.Infrastructure.DTO
 {
     public class RefreshTokenDTO
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public string Token { get; set; }
         public string JwtId { get; set; }
         public DateTime CreationDate { get; set; }
@@ -21,7 +19,5 @@ namespace TweetBook.Infrastructure.DTO
         public bool Invalidated { get; set; }
         public string UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; }
     }
 }

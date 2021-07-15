@@ -125,7 +125,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj": {
+                "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -191,6 +195,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -234,9 +244,6 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Contracts\\TweetBook.Contracts.csproj": {
-                "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Contracts\\TweetBook.Contracts.csproj"
-              },
               "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Domain\\TweetBook.Domain.csproj": {
                 "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Domain\\TweetBook.Domain.csproj"
               }

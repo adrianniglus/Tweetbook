@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Requests;
 using TweetBook.Data;
 using TweetBook.Infrastructure.DTO;
+using Mapster;
+using TweetBook.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace TweetBook.Infrastructure.Services
 {
@@ -20,14 +22,24 @@ namespace TweetBook.Infrastructure.Services
 
 
         public async Task<PostDTO> GetPostByIdAsync(Guid postId)
-            => await _dataContext.Posts.SingleOrDefaultAsync(x => x.Id == postId);
+        {
+            var post = await _dataContext.Posts.SingleOrDefaultAsync(x => x.Id == postId);
+
+            return post.Adapt<PostDTO>();
+
+        }
 
 
         public async Task<List<PostDTO>> GetPostsAsync()
-            => await _dataContext.Posts.ToListAsync();
-
-        public async Task<bool> CreatePostAsync(PostDTO post)
         {
+            var posts = await _dataContext.Posts.ToListAsync();
+
+
+            return posts.Adapt<List<PostDTO>>();
+        }
+        public async Task<bool> CreatePostAsync(PostDTO postDto)
+        {
+            var post = postDto.Adapt<Post>();
             
 
             await _dataContext.Posts.AddAsync(post);
@@ -39,8 +51,9 @@ namespace TweetBook.Infrastructure.Services
         }
 
 
-        public async Task<bool> UpdatePostAsync(PostDTO post)
+        public async Task<bool> UpdatePostAsync(PostDTO postDto)
         {
+            var post = postDto.Adapt<Post>();
             
 
             _dataContext.Posts.Update(post);
@@ -51,7 +64,9 @@ namespace TweetBook.Infrastructure.Services
 
         public async Task<bool> DeletePostAsync(Guid postId)
         {
-            var post = await GetPostByIdAsync(postId);
+            var postDto = await GetPostByIdAsync(postId);
+
+            var post = postDto.Adapt<Post>();
 
             if (post == null)
                 return false;
@@ -63,6 +78,12 @@ namespace TweetBook.Infrastructure.Services
 
         }
 
+        public async Task<List<TagDTO>> GetAllTagsAsync()
+        {
+            var tags = await _dataContext.Tags.ToListAsync();
+
+            return tags.Adapt<List<TagDTO>>();
+        }
         public async Task<bool> UserOwnsPostAsync(Guid postId, string userId)
         {
             var post = await _dataContext.Posts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == postId);
@@ -78,5 +99,7 @@ namespace TweetBook.Infrastructure.Services
             }
             return true;
         }
+
+        
     }
 }

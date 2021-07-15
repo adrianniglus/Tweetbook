@@ -6,8 +6,8 @@ namespace TweetBook.Infrastructure.Services
 {
     public interface IIdentityService
     {
-        Task<AuthenticationResultDTO> RegisterAsync(string email, string password);
-        Task<AuthenticationResultDTO> LoginAsync(string email, string password);
-        Task<AuthenticationResultDTO> RefreshTokenAsync(string token, string refreshToken);
+        Task<DTO.AuthenticationResult> RegisterAsync(string email, string password);
+        Task<DTO.AuthenticationResult> LoginAsync(string email, string password);
+        Task<DTO.AuthenticationResult> RefreshTokenAsync(string token, string refreshToken);
     }
 }
