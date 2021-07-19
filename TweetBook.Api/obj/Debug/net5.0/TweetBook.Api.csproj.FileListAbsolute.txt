@@ -77,3 +77,6 @@ C:\Projects\NickTutorial\TweetBook\TweetBook.Api\obj\Debug\net5.0\TweetBook.Api.
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Mapster.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Mapster.Core.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\FluentValidation.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll

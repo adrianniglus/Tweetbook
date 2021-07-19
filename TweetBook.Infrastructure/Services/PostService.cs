@@ -23,7 +23,7 @@ namespace TweetBook.Infrastructure.Services
 
         public async Task<PostDTO> GetPostByIdAsync(Guid postId)
         {
-            var post = await _dataContext.Posts.SingleOrDefaultAsync(x => x.Id == postId);
+            var post = await _dataContext.Posts.Include(x => x.Tags).SingleOrDefaultAsync(x => x.Id == postId);
 
             return post.Adapt<PostDTO>();
 
@@ -32,7 +32,7 @@ namespace TweetBook.Infrastructure.Services
 
         public async Task<List<PostDTO>> GetPostsAsync()
         {
-            var posts = await _dataContext.Posts.ToListAsync();
+            var posts = await _dataContext.Posts.Include(x => x.Tags).ToListAsync();
 
 
             return posts.Adapt<List<PostDTO>>();
@@ -84,6 +84,20 @@ namespace TweetBook.Infrastructure.Services
 
             return tags.Adapt<List<TagDTO>>();
         }
+
+
+        public async Task<bool> CreateTagAsync(TagDTO tagDto)
+        {
+            var tag = tagDto.Adapt<Tag>();
+
+
+            await _dataContext.Tags.AddAsync(tag);
+            var created = await _dataContext.SaveChangesAsync();
+
+            return created > 0;
+
+
+        }
         public async Task<bool> UserOwnsPostAsync(Guid postId, string userId)
         {
             var post = await _dataContext.Posts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == postId);
@@ -100,6 +114,11 @@ namespace TweetBook.Infrastructure.Services
             return true;
         }
 
-        
+        public async Task<TagDTO> GetTagByIdAsync(Guid tagId)
+        {
+            var tag = await _dataContext.Tags.SingleOrDefaultAsync(x => x.Id == tagId);
+
+            return tag.Adapt<TagDTO>();
+        }
     }
 }

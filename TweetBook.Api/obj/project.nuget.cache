@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "RRO2RrPqHiQfa2QxY9pzzFqXAoFmdHP/Osdsv8sJt+LT0MzCsI8thpTzlJsLiQN/hPBzzZ/0nwuFqWM1eoVNwQ==",
+  "dgSpecHash": "wDd/9tTNyddtjodRIDnxA5WS5jpFKIJDzIExyVs8OSaqrEHaJx7k0kgXJNQ1EsGi+vCPxSorHhyWFSVJ4TekBg==",
   "success": true,
   "projectFilePath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Api\\TweetBook.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\MobileManagement\\.nuget\\packages\\fluentvalidation\\10.3.0\\fluentvalidation.10.3.0.nupkg.sha512",
+    "C:\\Users\\MobileManagement\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.0\\fluentvalidation.aspnetcore.10.3.0.nupkg.sha512",
+    "C:\\Users\\MobileManagement\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.0\\fluentvalidation.dependencyinjectionextensions.10.3.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster\\7.2.0\\mapster.7.2.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",

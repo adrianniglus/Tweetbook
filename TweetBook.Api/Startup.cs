@@ -48,7 +48,6 @@ namespace TweetBook
             );
 
 
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -6,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TweetBook.Api.Authorization;
+using TweetBook.Api.Filters;
 using TweetBook.Api.OperationFilter;
 using TweetBook.Infrastructure.Options;
 using TweetBook.Infrastructure.Services;
@@ -14,6 +18,7 @@ namespace TweetBook.Installers
 {
     public class MvcInstaller : IInstaller
     {
+
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = new JwtSettings();
@@ -21,6 +26,11 @@ namespace TweetBook.Installers
             services.AddSingleton(jwtSettings);
 
             services.AddScoped<IIdentityService, IdentityService>();
+
+            services.AddMvc(options =>
+                options.Filters.Add<ValidationFilter>())
+                    .AddFluentValidation(conf => conf.RegisterValidatorsFromAssemblyContaining<Startup>());
+
 
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -47,7 +57,16 @@ namespace TweetBook.Installers
                 x.TokenValidationParameters = tokenValidationParameters;
             });
 
-            //services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MustWorkForGoogle", policy =>
+                {
+                    policy.AddRequirements(new WorksForCompanyRequirement("gmail.com"));
+                });
+            });
+
+
+            services.AddSingleton<IAuthorizationHandler, WorksForCompanyHandler>();
 
 
             services.AddSwaggerGen(x =>
@@ -56,7 +75,7 @@ namespace TweetBook.Installers
 
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    {"Bearer", new string[0] }
+                    {"Bearer", Array.Empty<string>() }
                 };
 
                 x.AddSecurityDefinition("bearer", new OpenApiSecurityScheme

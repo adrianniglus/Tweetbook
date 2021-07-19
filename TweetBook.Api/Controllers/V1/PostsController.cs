@@ -22,7 +22,7 @@ namespace TweetBook.Controllers.V1
             _postService = postService;
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.Get)]
         public async Task<IActionResult> Get([FromRoute] Guid postId)
         {
@@ -36,18 +36,19 @@ namespace TweetBook.Controllers.V1
             return Ok(post);
         }
 
-
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.GetAll)]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _postService.GetPostsAsync());
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost(Contracts.V1.ApiRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
         {
+            
+
             var post = new PostDTO
             {
                 Name = postRequest.Name,
@@ -64,14 +65,14 @@ namespace TweetBook.Controllers.V1
             var response = new PostResponse
             {
                 Id = post.Id,
-                Name = post.Name
-
+                Name = post.Name,
+                Tags = post.Tags
             };
 
             return Created(locationUri, response);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut(TweetBook.Contracts.V1.ApiRoutes.Posts.Update)]
         public async Task<IActionResult> Update([FromRoute] Guid postId, [FromBody] UpdatePostRequest postRequest)
         {
@@ -95,7 +96,7 @@ namespace TweetBook.Controllers.V1
             return NotFound();
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete(Contracts.V1.ApiRoutes.Posts.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid postId)
         {
