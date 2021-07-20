@@ -7,6 +7,7 @@ using TweetBook.Infrastructure.DTO;
 using Mapster;
 using TweetBook.Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace TweetBook.Infrastructure.Services
 {
@@ -23,19 +24,30 @@ namespace TweetBook.Infrastructure.Services
 
         public async Task<PostDTO> GetPostByIdAsync(Guid postId)
         {
-            var post = await _dataContext.Posts.Include(x => x.Tags).SingleOrDefaultAsync(x => x.Id == postId);
+            var post = await _dataContext.Posts.AsNoTracking().Include(x => x.Tags).SingleOrDefaultAsync(x => x.Id == postId);
 
             return post.Adapt<PostDTO>();
 
         }
 
 
-        public async Task<List<PostDTO>> GetPostsAsync()
+        public async Task<List<PostDTO>> GetPostsAsync(PaginationFilterDTO paginationFilter = null)
         {
-            var posts = await _dataContext.Posts.Include(x => x.Tags).ToListAsync();
+            var pagination = paginationFilter.Adapt<PaginationFilter>();
 
 
+            if (pagination == null)
+            {
+                var posts1 = await _dataContext.Posts.AsNoTracking().Include(x => x.Tags).ToListAsync();
+                return posts1.Adapt<List<PostDTO>>();
+            }
+
+            var skip = (pagination.PageNumber - 1) * pagination.PageSize;
+
+
+            var posts = await _dataContext.Posts.AsNoTracking().Include(x => x.Tags).Skip(skip).Take(pagination.PageSize).ToListAsync();
             return posts.Adapt<List<PostDTO>>();
+
         }
         public async Task<bool> CreatePostAsync(PostDTO postDto)
         {
@@ -114,11 +126,28 @@ namespace TweetBook.Infrastructure.Services
             return true;
         }
 
+        
+
         public async Task<TagDTO> GetTagByIdAsync(Guid tagId)
         {
-            var tag = await _dataContext.Tags.SingleOrDefaultAsync(x => x.Id == tagId);
+            var tag = await _dataContext.Tags.AsNoTracking().SingleOrDefaultAsync(x => x.Id == tagId);
 
             return tag.Adapt<TagDTO>();
+        }
+
+        public async Task<bool> DeleteTagAsync(Guid tagId)
+        {
+            var tagDto = await GetTagByIdAsync(tagId);
+
+            var tag = tagDto.Adapt<Tag>();
+
+            if (tag == null)
+                return false;
+
+            _dataContext.Tags.Remove(tag);
+            var deleted = await _dataContext.SaveChangesAsync();
+
+            return deleted > 0;
         }
     }
 }

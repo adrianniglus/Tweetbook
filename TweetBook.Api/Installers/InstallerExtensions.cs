@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
-namespace TweetBook.Installers
+namespace TweetBook.Api.Installers
 {
     public static class InstallerExtensions
     {

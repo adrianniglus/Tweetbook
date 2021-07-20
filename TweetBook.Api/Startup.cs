@@ -4,9 +4,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TweetBook.Infrastructure.Options;
-using TweetBook.Installers;
+using TweetBook.Api.Installers;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using TweetBook.Contracts.HealthChecks;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
-namespace TweetBook
+namespace TweetBook.Api
 {
     public class Startup
     {
@@ -37,6 +42,26 @@ namespace TweetBook
             {
                 app.UseHsts();
             }
+
+            app.UseHealthChecks("/health", new HealthCheckOptions
+            {
+                ResponseWriter = async (context, report) =>
+                {
+                    context.Response.ContentType = "application/json";
+                    var response = new HealthCheckResponse
+                    {
+                        Status = report.Status.ToString(),
+                        Checks = report.Entries.Select(x => new HealthCheck
+                        {
+                            Component = x.Key,
+                            Status = x.Value.Status.ToString(),
+                            Description = x.Value.Description
+                        }),
+                        Duration = report.TotalDuration
+                    };
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
+                }
+            });
 
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);

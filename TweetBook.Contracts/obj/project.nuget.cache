@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8t/cXusZrClEpm0cMghcBNBBpYcPskHHG3gxubbRlLr2xOrCZyL2AvXD6oG5GoRPMqc1Anw9sDwxb12XTzJaLA==",
+  "dgSpecHash": "M7Bqwfm7x4GdYR2QNzLQsoXf1nGpDNRC4Sy1XucQQHe9qA6DEE/Ob6RYJic5QgWoeI/Ijai87irZKGAqGKbgqQ==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Contracts\\TweetBook.Contracts.csproj",
+  "projectFilePath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Contracts\\TweetBook.Contracts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MobileManagement\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster\\7.2.0\\mapster.7.2.0.nupkg.sha512",

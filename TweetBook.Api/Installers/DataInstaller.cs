@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TweetBook.Data;
 using TweetBook.Infrastructure.Services;
 
-namespace TweetBook.Installers
+namespace TweetBook.Api.Installers
 {
     public class DataInstaller : IInstaller
     {

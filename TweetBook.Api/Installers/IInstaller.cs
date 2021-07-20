@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace TweetBook.Installers
+namespace TweetBook.Api.Installers
 {
     public interface IInstaller
     {

@@ -7,7 +7,7 @@ namespace TweetBook.Infrastructure.Services
 {
     public interface IPostService
     {
-        Task<List<PostDTO>> GetPostsAsync();
+        Task<List<PostDTO>> GetPostsAsync(PaginationFilterDTO paginationFilter = null);
         Task<PostDTO> GetPostByIdAsync(Guid postId);
         Task<bool> CreatePostAsync(PostDTO postDto);
         Task<bool> UpdatePostAsync(PostDTO postDto);
@@ -16,5 +16,6 @@ namespace TweetBook.Infrastructure.Services
         Task<List<TagDTO>> GetAllTagsAsync();
         Task<TagDTO> GetTagByIdAsync(Guid tagId);
         Task<bool> CreateTagAsync(TagDTO tagDto);
+        Task<bool> DeleteTagAsync(Guid tagId);
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using TweetBook.Data;
 
-namespace TweetBook
+namespace TweetBook.Api
 {
     public class Program
     {

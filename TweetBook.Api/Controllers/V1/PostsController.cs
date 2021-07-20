@@ -10,6 +10,7 @@ using TweetBook.Infrastructure.DTO;
 using TweetBook.Infrastructure.Extensions;
 using TweetBook.Infrastructure.Services;
 using Mapster;
+using TweetBook.Contracts.V1.Requests.Queries;
 
 namespace TweetBook.Controllers.V1
 {
@@ -38,19 +39,26 @@ namespace TweetBook.Controllers.V1
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.GetAll)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] PaginationQuery paginationQuery)
         {
-            return Ok(await _postService.GetPostsAsync());
+            var paginationFilterDto = paginationQuery.Adapt<PaginationFilterDTO>();
+
+            var posts = await _postService.GetPostsAsync(paginationFilterDto);
+
+            var paginationResponse = new PagedResponse<PostDTO>(posts);
+
+            return Ok(paginationResponse);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost(Contracts.V1.ApiRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
         {
-            
+            var newPostId = Guid.NewGuid();
 
             var post = new PostDTO
             {
+                Id = newPostId,
                 Name = postRequest.Name,
                 UserId = HttpContext.GetUserId(),
                 Tags = postRequest.Tags.Adapt<List<TagDTO>>()
@@ -61,6 +69,7 @@ namespace TweetBook.Controllers.V1
             await _postService.CreatePostAsync(post);
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Posts.Get.Replace("{postId}", post.Id.ToString());
+
 
             var response = new PostResponse
             {

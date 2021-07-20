@@ -6221,11 +6221,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj",
       "projectName": "TweetBook.Infrastructure",
-      "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj",
+      "projectPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\MobileManagement\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\obj\\",
+      "outputPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MobileManagement\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6242,8 +6242,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Domain\\TweetBook.Domain.csproj": {
-              "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Domain\\TweetBook.Domain.csproj"
+            "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Domain\\TweetBook.Domain.csproj": {
+              "projectPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Domain\\TweetBook.Domain.csproj"
             }
           }
         }

@@ -80,3 +80,7 @@ C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\Microsoft.AspN
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\FluentValidation.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
 C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.dll
+C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
+C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Newtonsoft.Json.dll

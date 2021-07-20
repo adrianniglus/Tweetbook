@@ -14,7 +14,7 @@ using TweetBook.Api.OperationFilter;
 using TweetBook.Infrastructure.Options;
 using TweetBook.Infrastructure.Services;
 
-namespace TweetBook.Installers
+namespace TweetBook.Api.Installers
 {
     public class MvcInstaller : IInstaller
     {

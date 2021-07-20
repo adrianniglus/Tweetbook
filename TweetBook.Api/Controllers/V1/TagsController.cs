@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Requests;
 using TweetBook.Contracts.V1.Responses;
 using TweetBook.Infrastructure.DTO;
+using TweetBook.Infrastructure.Extensions;
 using TweetBook.Infrastructure.Services;
 
 namespace TweetBook.Api.Controllers.V1
@@ -27,17 +28,19 @@ namespace TweetBook.Api.Controllers.V1
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Tags.GetAll)]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _postService.GetAllTagsAsync());
+            var posts = await _postService.GetAllTagsAsync();
+            return Ok(new PagedResponse<TagDTO>(posts));
         }
 
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Tags.Create)]
-        public async Task<IActionResult> Create([FromBody] CreateTagRequest tagRequest)
+        public async Task<IActionResult> Create([FromBody] CreateAndAddTagToPostRequest tagRequest)
         {
             var tag = new TagDTO
             {
-                TagName = tagRequest.TagName                
+                TagName = tagRequest.TagName,
+                PostId = tagRequest.PostId
             };
 
 
@@ -69,5 +72,28 @@ namespace TweetBook.Api.Controllers.V1
 
             return Ok(tag);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete(Contracts.V1.ApiRoutes.Tags.Delete)]
+        public async Task<IActionResult> Delete([FromRoute] Guid tagId)
+        {
+            var tag = await _postService.GetTagByIdAsync(tagId);
+
+            var userOwnsPost = await _postService.UserOwnsPostAsync(tag.PostId, HttpContext.GetUserId());
+
+            if (!userOwnsPost)
+            {
+                return BadRequest(new { error = "You do not own this post/tag" });
+            }
+
+
+            var deleted = await _postService.DeleteTagAsync(tagId);
+
+            if (deleted)
+                return NoContent();
+
+            return NotFound();
+        }
+
     }
 }

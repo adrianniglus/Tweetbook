@@ -19,6 +19,15 @@ namespace TweetBook.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Tag>(entity =>
+            {
+                entity.HasOne(x => x.Post)
+                      .WithMany(x => x.Tags)
+                      .HasForeignKey(x => x.PostId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+
             base.OnModelCreating(modelBuilder);
         }
 
