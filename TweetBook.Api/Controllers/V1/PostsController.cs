@@ -10,7 +10,9 @@ using TweetBook.Infrastructure.DTO;
 using TweetBook.Infrastructure.Extensions;
 using TweetBook.Infrastructure.Services;
 using Mapster;
-using TweetBook.Contracts.V1.Requests.Queries;
+using MediatR;
+using TweetBook.Contracts.V1.Queries;
+using TweetBook.Contracts.V1.Commands;
 
 namespace TweetBook.Controllers.V1
 {
@@ -18,67 +20,54 @@ namespace TweetBook.Controllers.V1
     public class PostsController : Controller
     {
         private readonly IPostService _postService;
-        public PostsController(IPostService postService)
+        private readonly IMediator _mediator;
+        public PostsController(IPostService postService, IMediator mediator)
         {
             _postService = postService;
+            _mediator = mediator;
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.Get)]
         public async Task<IActionResult> Get([FromRoute] Guid postId)
         {
-            var post = await _postService.GetPostByIdAsync(postId);
+            var query = new GetPostByIdQuery(postId);
 
-            if (post == null)
+            var result =  await _mediator.Send(query);
+
+            if(result == null)
             {
                 return NotFound();
             }
 
-            return Ok(post);
+            return Ok(result);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.GetAll)]
-        public async Task<IActionResult> GetAll([FromQuery] PaginationQuery paginationQuery)
+        public async Task<IActionResult> GetAll()
         {
-            var paginationFilterDto = paginationQuery.Adapt<PaginationFilterDTO>();
+            var querry = new GetAllPostsQuery();
+            var result = await _mediator.Send(querry);
 
-            var posts = await _postService.GetPostsAsync(paginationFilterDto);
-
-            var paginationResponse = new PagedResponse<PostDTO>(posts);
-
-            return Ok(paginationResponse);
+            return Ok(result);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost(Contracts.V1.ApiRoutes.Posts.Create)]
-        public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
+        public async Task<IActionResult> Create([FromBody] CreatePostCommand command)
         {
-            var newPostId = Guid.NewGuid();
 
-            var post = new PostDTO
-            {
-                Id = newPostId,
-                Name = postRequest.Name,
-                UserId = HttpContext.GetUserId(),
-                Tags = postRequest.Tags.Adapt<List<TagDTO>>()
-            };
+            var result = await _mediator.Send(command);
 
-
-
-            await _postService.CreatePostAsync(post);
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Posts.Get.Replace("{postId}", post.Id.ToString());
+            var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Posts.Get.Replace("{postId}", result.Id.ToString());
+
+            
+
+            return Created(locationUri, result);
 
 
-            var response = new PostResponse
-            {
-                Id = post.Id,
-                Name = post.Name,
-                Tags = post.Tags
-            };
-
-            return Created(locationUri, response);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

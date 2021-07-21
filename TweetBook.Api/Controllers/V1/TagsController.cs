@@ -28,8 +28,8 @@ namespace TweetBook.Api.Controllers.V1
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Tags.GetAll)]
         public async Task<IActionResult> GetAll()
         {
-            var posts = await _postService.GetAllTagsAsync();
-            return Ok(new PagedResponse<TagDTO>(posts));
+            var tags = await _postService.GetAllTagsAsync();
+            return Ok(tags);
         }
 
 

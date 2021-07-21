@@ -84,3 +84,5 @@ C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Exte
 C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
 C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
 C:\Projects\NickTutorial\Tweetbook\TweetBook.Api\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\MediatR.dll
+C:\Projects\NickTutorial\TweetBook\TweetBook.Api\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

@@ -5,9 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TweetBook.Infrastructure\TweetBook.Infrastructure.csproj" />
   </ItemGroup>
 
+ 
   
 
 </Project>

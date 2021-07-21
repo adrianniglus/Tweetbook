@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vVED1EZOZpczMMphX2Vps/raJdaSdM1MjN9e7o4+6dU+m/a6UOEWXRx0GAmoiIIwoSDYTBL/EmvxVy9P7fDZdw==",
+  "dgSpecHash": "EMdqpAtvqmV7vanyt8dge0LZtWSAzvJN2qAy1Q7eq4GCZN3XLmEGWzUr9nCa75Gziyf25KVen8ZX1Z200+giYA==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Api\\TweetBook.Api.csproj",
+  "projectFilePath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Api\\TweetBook.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MobileManagement\\.nuget\\packages\\fluentvalidation\\10.3.0\\fluentvalidation.10.3.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.0\\fluentvalidation.aspnetcore.10.3.0.nupkg.sha512",
@@ -10,6 +10,8 @@
     "C:\\Users\\MobileManagement\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster\\7.2.0\\mapster.7.2.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
+    "C:\\Users\\MobileManagement\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\MobileManagement\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\9.0.0\\mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.7\\microsoft.aspnetcore.authentication.jwtbearer.5.0.7.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.7\\microsoft.aspnetcore.cryptography.internal.5.0.7.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.7\\microsoft.aspnetcore.cryptography.keyderivation.5.0.7.nupkg.sha512",

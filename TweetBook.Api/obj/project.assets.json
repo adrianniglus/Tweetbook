@@ -72,6 +72,28 @@
           "lib/netstandard2.0/Mapster.Core.dll": {}
         }
       },
+      "MediatR/9.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/MediatR.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/MediatR.dll": {}
+        }
+      },
+      "MediatR.Extensions.Microsoft.DependencyInjection/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "MediatR": "9.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.7": {
         "type": "package",
         "dependencies": {
@@ -1741,6 +1763,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "MediatR": "9.0.0",
           "TweetBook.Infrastructure": "1.0.0"
         },
         "compile": {
@@ -1881,6 +1904,37 @@
         "lib/netstandard2.0/Mapster.Core.dll",
         "mapster.core.1.2.0.nupkg.sha512",
         "mapster.core.nuspec"
+      ]
+    },
+    "MediatR/9.0.0": {
+      "sha512": "8b3UYNxegHVYcJMG2zH8wn+YqxLvXG+eMfj0cMCq/jTW72p6O3PCKMkrIv0mqyxdW7bA4gblsocw7n+/9Akg5g==",
+      "type": "package",
+      "path": "mediatr/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gradient_128x128.png",
+        "lib/net461/MediatR.dll",
+        "lib/net461/MediatR.xml",
+        "lib/netstandard2.0/MediatR.dll",
+        "lib/netstandard2.0/MediatR.xml",
+        "lib/netstandard2.1/MediatR.dll",
+        "lib/netstandard2.1/MediatR.xml",
+        "mediatr.9.0.0.nupkg.sha512",
+        "mediatr.nuspec"
+      ]
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/9.0.0": {
+      "sha512": "msreY4ogiPdIRWiCQVHQDytIQpsZCLWsixWPZ+Xs86KZrvtuiV8BDHbIT0kBmogynVYWNpspb3caw+86YU8L6w==",
+      "type": "package",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gradient_128x128.png",
+        "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll",
+        "mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
+        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.7": {
@@ -6261,6 +6315,8 @@
     "net5.0": [
       "FluentValidation.AspNetCore >= 10.3.0",
       "Mapster >= 7.2.0",
+      "MediatR >= 9.0.0",
+      "MediatR.Extensions.Microsoft.DependencyInjection >= 9.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.7",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.7",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.7",
@@ -6280,11 +6336,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Api\\TweetBook.Api.csproj",
+      "projectUniqueName": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Api\\TweetBook.Api.csproj",
       "projectName": "TweetBook.Api",
-      "projectPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Api\\TweetBook.Api.csproj",
+      "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Api\\TweetBook.Api.csproj",
       "packagesPath": "C:\\Users\\MobileManagement\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Api\\obj\\",
+      "outputPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MobileManagement\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6301,11 +6357,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Contracts\\TweetBook.Contracts.csproj": {
-              "projectPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Contracts\\TweetBook.Contracts.csproj"
+            "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Contracts\\TweetBook.Contracts.csproj": {
+              "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Contracts\\TweetBook.Contracts.csproj"
             },
-            "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj": {
-              "projectPath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj"
+            "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj": {
+              "projectPath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Infrastructure\\TweetBook.Infrastructure.csproj"
             }
           }
         }
@@ -6327,6 +6383,14 @@
           "Mapster": {
             "target": "Package",
             "version": "[7.2.0, )"
+          },
+          "MediatR": {
+            "target": "Package",
+            "version": "[9.0.0, )"
+          },
+          "MediatR.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[9.0.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

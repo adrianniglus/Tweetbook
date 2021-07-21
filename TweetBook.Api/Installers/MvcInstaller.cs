@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ namespace TweetBook.Api.Installers
 
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(jwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);

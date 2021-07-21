@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "M7Bqwfm7x4GdYR2QNzLQsoXf1nGpDNRC4Sy1XucQQHe9qA6DEE/Ob6RYJic5QgWoeI/Ijai87irZKGAqGKbgqQ==",
+  "dgSpecHash": "m3Zy1zePUi/uMvCljyUwF5l2CYQ2k4dFg3IjPXs8Bl8sA/+hfD3B3e9xKk+wGvWIuEcKvqzXSoyh4/ziZebkAQ==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\NickTutorial\\Tweetbook\\TweetBook.Contracts\\TweetBook.Contracts.csproj",
+  "projectFilePath": "C:\\Projects\\NickTutorial\\TweetBook\\TweetBook.Contracts\\TweetBook.Contracts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MobileManagement\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster\\7.2.0\\mapster.7.2.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
+    "C:\\Users\\MobileManagement\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.7\\microsoft.aspnetcore.cryptography.internal.5.0.7.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.7\\microsoft.aspnetcore.cryptography.keyderivation.5.0.7.nupkg.sha512",
     "C:\\Users\\MobileManagement\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\5.0.7\\microsoft.aspnetcore.diagnostics.entityframeworkcore.5.0.7.nupkg.sha512",

@@ -8,6 +8,7 @@ using Mapster;
 using TweetBook.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using TweetBook.Infrastructure.Models;
 
 namespace TweetBook.Infrastructure.Services
 {
@@ -31,27 +32,21 @@ namespace TweetBook.Infrastructure.Services
         }
 
 
-        public async Task<List<PostDTO>> GetPostsAsync(PaginationFilterDTO paginationFilter = null)
+        public async Task<List<PostDTO>> GetPostsAsync()
         {
-            var pagination = paginationFilter.Adapt<PaginationFilter>();
-
-
-            if (pagination == null)
-            {
-                var posts1 = await _dataContext.Posts.AsNoTracking().Include(x => x.Tags).ToListAsync();
-                return posts1.Adapt<List<PostDTO>>();
-            }
-
-            var skip = (pagination.PageNumber - 1) * pagination.PageSize;
-
-
-            var posts = await _dataContext.Posts.AsNoTracking().Include(x => x.Tags).Skip(skip).Take(pagination.PageSize).ToListAsync();
+            var posts = await _dataContext.Posts.AsNoTracking().Include(x => x.Tags).ToListAsync();
             return posts.Adapt<List<PostDTO>>();
 
         }
-        public async Task<bool> CreatePostAsync(PostDTO postDto)
+        public async Task<bool> CreatePostAsync(Guid id,string name, string userId, List<TagModel> tags)
         {
-            var post = postDto.Adapt<Post>();
+            var post = new Post
+            {
+                Id = id,
+                Name = name,
+                UserId = userId,
+                Tags = tags.Adapt<List<Tag>>()
+            };
             
 
             await _dataContext.Posts.AddAsync(post);

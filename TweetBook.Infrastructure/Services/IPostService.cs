@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TweetBook.Infrastructure.DTO;
+using TweetBook.Infrastructure.Models;
 
 namespace TweetBook.Infrastructure.Services
 {
     public interface IPostService
     {
-        Task<List<PostDTO>> GetPostsAsync(PaginationFilterDTO paginationFilter = null);
+        Task<List<PostDTO>> GetPostsAsync();
         Task<PostDTO> GetPostByIdAsync(Guid postId);
-        Task<bool> CreatePostAsync(PostDTO postDto);
+        Task<bool> CreatePostAsync(Guid id, string name, string userId, List<TagModel> tags);
         Task<bool> UpdatePostAsync(PostDTO postDto);
         Task<bool> DeletePostAsync(Guid postId);
         Task<bool> UserOwnsPostAsync(Guid postId, string userId);

@@ -8,6 +8,7 @@ namespace TweetBook.Contracts.V1.Responses
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<TagDTO> Tags { get; set; }
+        public string UserId { get; set; }
+        public List<TagResponse> Tags { get; set; }
     }
 }
