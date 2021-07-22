@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Responses;
 
 namespace TweetBook.Contracts.V1.Commands
 {
-    public class UpdatePostCommand
+    public class DeletePostCommand : IRequest<bool>
     {
-        public string Name { get; set; }
+        public Guid postId { get; set; }
     }
 }

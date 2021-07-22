@@ -58,10 +58,13 @@ namespace TweetBook.Infrastructure.Services
         }
 
 
-        public async Task<bool> UpdatePostAsync(PostDTO postDto)
+        public async Task<bool> UpdatePostAsync(Guid postId, string name)
         {
-            var post = postDto.Adapt<Post>();
-            
+
+            var post = await GetEntityPostByIdAsync(postId);
+
+            post.Name = name;
+                       
 
             _dataContext.Posts.Update(post);
             var updated = await _dataContext.SaveChangesAsync();
@@ -71,9 +74,8 @@ namespace TweetBook.Infrastructure.Services
 
         public async Task<bool> DeletePostAsync(Guid postId)
         {
-            var postDto = await GetPostByIdAsync(postId);
 
-            var post = postDto.Adapt<Post>();
+            var post = await GetEntityPostByIdAsync(postId);
 
             if (post == null)
                 return false;
@@ -143,6 +145,14 @@ namespace TweetBook.Infrastructure.Services
             var deleted = await _dataContext.SaveChangesAsync();
 
             return deleted > 0;
+        }
+
+        private async Task<Post> GetEntityPostByIdAsync(Guid postId)
+        {
+            var post = await _dataContext.Posts.Include(x => x.Tags).SingleOrDefaultAsync(x => x.Id == postId);
+
+            return post;
+
         }
     }
 }

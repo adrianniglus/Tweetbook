@@ -4,10 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Requests;
-using TweetBook.Contracts.V1.Responses;
-using TweetBook.Infrastructure.DTO;
-using TweetBook.Infrastructure.Extensions;
 using TweetBook.Infrastructure.Services;
 using Mapster;
 using MediatR;
@@ -71,47 +67,41 @@ namespace TweetBook.Controllers.V1
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut(TweetBook.Contracts.V1.ApiRoutes.Posts.Update)]
-        public async Task<IActionResult> Update([FromRoute] Guid postId, [FromBody] UpdatePostRequest postRequest)
+        [HttpPut(TweetBook.Contracts.V1.ApiRoutes.Posts.Update)] //convert to CQRS
+        public async Task<IActionResult> Update([FromRoute] Guid postId, [FromBody] UpdatePostCommand command)
         {
 
-            var userOwnsPost = await _postService.UserOwnsPostAsync(postId, HttpContext.GetUserId());
-
-            if(!userOwnsPost)
+            var mergedCommand = new UpdatePostMergedCommand
             {
-                return BadRequest(new { error = "You do not own this post"});
+                PostId = postId,
+                Name = command.Name
+            };
+
+            var result = await _mediator.Send(mergedCommand);
+
+
+            if (result == null)
+            {
+                return BadRequest(new { error = "You do not own this post or it doesn't exist!" });
             }
-            var post = await _postService.GetPostByIdAsync(postId);
 
-            post.Name = postRequest.Name;
 
-            var updated = await _postService.UpdatePostAsync(post);
 
-            
-
-            if (updated)
-                return Ok(post);
-            return NotFound();
+            return Ok(result);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete(Contracts.V1.ApiRoutes.Posts.Delete)]
-        public async Task<IActionResult> Delete([FromRoute] Guid postId)
+        public async Task<IActionResult> Delete([FromRoute] DeletePostCommand command)
         {
-            var userOwnsPost = await _postService.UserOwnsPostAsync(postId, HttpContext.GetUserId());
+            var result = await _mediator.Send(command);
 
-            if (!userOwnsPost)
-            {
-                return BadRequest(new { error = "You do not own this post" });
-            }
-
-
-            var deleted = await _postService.DeletePostAsync(postId);
-
-            if (deleted)
+            if (result)
                 return NoContent();
 
-            return NotFound();
+            return BadRequest(new { error = "You do not own this post or it doesn't exist!" });
+
+            //return NotFound();
         }
 
 
