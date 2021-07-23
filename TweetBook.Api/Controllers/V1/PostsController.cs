@@ -2,24 +2,19 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using TweetBook.Infrastructure.Services;
-using Mapster;
 using MediatR;
-using TweetBook.Contracts.V1.Queries;
-using TweetBook.Contracts.V1.Commands;
+using TweetBook.Contracts.V1.Commands.Posts;
+using TweetBook.Contracts.V1.Queries.Posts;
 
 namespace TweetBook.Controllers.V1
 {
     
     public class PostsController : Controller
     {
-        private readonly IPostService _postService;
         private readonly IMediator _mediator;
-        public PostsController(IPostService postService, IMediator mediator)
+        public PostsController(IMediator mediator)
         {
-            _postService = postService;
             _mediator = mediator;
         }
 
@@ -67,7 +62,7 @@ namespace TweetBook.Controllers.V1
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut(TweetBook.Contracts.V1.ApiRoutes.Posts.Update)] //convert to CQRS
+        [HttpPut(TweetBook.Contracts.V1.ApiRoutes.Posts.Update)]
         public async Task<IActionResult> Update([FromRoute] Guid postId, [FromBody] UpdatePostCommand command)
         {
 

@@ -1,98 +1,111 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Requests;
-using TweetBook.Contracts.V1.Responses;
-using TweetBook.Infrastructure.DTO;
-using TweetBook.Infrastructure.Extensions;
-using TweetBook.Infrastructure.Services;
+using TweetBook.Contracts.V1.Commands.Tags;
+using TweetBook.Contracts.V1.Queries.Tags;
 
 namespace TweetBook.Api.Controllers.V1
 {
     
     public class TagsController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IMediator _mediator;
 
-        public TagsController(IPostService postService)
+        public TagsController(IMediator mediator)
         {
-            _postService = postService;
-        }
-
-
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "MustWorkForGoogle")]
-        [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Tags.GetAll)]
-        public async Task<IActionResult> GetAll()
-        {
-            var tags = await _postService.GetAllTagsAsync();
-            return Ok(tags);
-        }
-
-
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Tags.Create)]
-        public async Task<IActionResult> Create([FromBody] CreateAndAddTagToPostRequest tagRequest)
-        {
-            var tag = new TagDTO
-            {
-                TagName = tagRequest.TagName,
-                PostId = tagRequest.PostId
-            };
-
-
-
-            await _postService.CreateTagAsync(tag);
-            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Tags.Get.Replace("{tagId}", tag.Id.ToString());
-
-            var response = new TagResponse
-            {
-                Id = tag.Id,
-                TagName =  tag.TagName,
-                PostId = tag.PostId
-            };
-
-            return Created(locationUri, response);
+            _mediator = mediator;
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Tags.Get)]
         public async Task<IActionResult> Get([FromRoute] Guid tagId)
         {
-            var tag = await _postService.GetTagByIdAsync(tagId);
+            var query = new GetTagByIdQuery(tagId);
 
-            if (tag == null)
+            var result = await _mediator.Send(query);
+
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(tag);
+            return Ok(result);
+
+
+           
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "MustWorkForGoogle")]
+        [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Tags.GetAll)]
+        public async Task<IActionResult> GetAll()
+        {
+            var querry = new GetAllTagsQuery();
+
+            var result = await _mediator.Send(querry);
+
+            
+            return Ok(result);
+        }
+
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete(Contracts.V1.ApiRoutes.Tags.Delete)]
+        [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Tags.Create)]
+        public async Task<IActionResult> Create([FromBody] CreateTagMergedCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+
+
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUri = baseUrl + "/" + Contracts.V1.ApiRoutes.Tags.Get.Replace("{tagId}", result.Id.ToString());
+
+            
+
+            return Created(locationUri, result);
+        }
+
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete(Contracts.V1.ApiRoutes.Tags.Update)]
         public async Task<IActionResult> Delete([FromRoute] Guid tagId)
         {
-            var tag = await _postService.GetTagByIdAsync(tagId);
-
-            var userOwnsPost = await _postService.UserOwnsPostAsync(tag.PostId, HttpContext.GetUserId());
-
-            if (!userOwnsPost)
+            var command = new DeleteTagCommand
             {
-                return BadRequest(new { error = "You do not own this post/tag" });
-            }
+                Id = tagId
+            };
+
+            var result = await _mediator.Send(command);
 
 
-            var deleted = await _postService.DeleteTagAsync(tagId);
-
-            if (deleted)
+            if (result)
                 return NoContent();
 
             return NotFound();
+        }
+
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut(Contracts.V1.ApiRoutes.Tags.Update)]
+        public async Task<IActionResult> Update([FromRoute] Guid tagId,[FromBody] UpdateTagCommand command)
+        {
+            var mergedCommand = new UpdateTagMergedCommand
+            {
+                Id = tagId,
+                Name = command.Name
+            };
+
+            var result = await _mediator.Send(mergedCommand);
+
+
+            if (result == null)
+            {
+                return BadRequest(new { error = "You do not own this tag or it doesn't exist!" });
+            }
+
+            return Ok(result);
         }
 
     }

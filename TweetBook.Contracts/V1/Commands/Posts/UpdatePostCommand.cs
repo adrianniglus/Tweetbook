@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Responses;
 
-namespace TweetBook.Contracts.V1.Commands
+namespace TweetBook.Contracts.V1.Commands.Posts
 {
     public class UpdatePostCommand
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TweetBook.Contracts.V1.Requests
+namespace TweetBook.Contracts.V1.Commands.Tags
 {
-    public class CreateTagRequest
+    public class CreateTagCommand
     {
         public string TagName { get; set; }
     }

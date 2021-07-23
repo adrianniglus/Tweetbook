@@ -1,16 +1,13 @@
 ﻿using Mapster;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Queries;
+using TweetBook.Contracts.V1.Queries.Posts;
 using TweetBook.Contracts.V1.Responses;
 using TweetBook.Infrastructure.Services;
 
-namespace TweetBook.Contracts.V1.Handlers
+namespace TweetBook.Contracts.V1.Handlers.Posts
 {
     public class GetAllPostsHandler : IRequestHandler<GetAllPostsQuery, List<PostResponse>>
     {

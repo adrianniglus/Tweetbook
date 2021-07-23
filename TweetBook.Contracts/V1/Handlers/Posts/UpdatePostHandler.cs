@@ -1,17 +1,13 @@
 ﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Commands;
+using TweetBook.Contracts.V1.Commands.Posts;
 using TweetBook.Contracts.V1.Responses;
 using TweetBook.Infrastructure.Services;
 
-namespace TweetBook.Contracts.V1.Handlers
+namespace TweetBook.Contracts.V1.Handlers.Posts
 {
     public class UpdatePostHandler : IRequestHandler<UpdatePostMergedCommand, PostResponse>
     {

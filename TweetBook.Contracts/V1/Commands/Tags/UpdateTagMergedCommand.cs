@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Responses;
 
-namespace TweetBook.Contracts.V1.Queries
+namespace TweetBook.Contracts.V1.Commands.Tags
 {
-    public class GetAllPostsQuery : IRequest<List<PostResponse>>
+    public class UpdateTagMergedCommand : IRequest<TagResponse>
     {
-
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }

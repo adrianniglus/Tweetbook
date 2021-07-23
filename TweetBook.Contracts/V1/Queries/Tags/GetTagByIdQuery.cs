@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TweetBook.Contracts.V1.Responses;
 
-namespace TweetBook.Contracts.V1.Queries
+namespace TweetBook.Contracts.V1.Queries.Tags
 {
-    public class GetPostByIdQuery : IRequest<PostResponse>
+    public class GetTagByIdQuery : IRequest<TagResponse>
     {
         public Guid Id { get; }
 
-        public GetPostByIdQuery(Guid id)
+        public GetTagByIdQuery(Guid id)
         {
             Id = id;
         }

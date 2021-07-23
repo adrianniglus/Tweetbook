@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TweetBook.Contracts.V1.Commands
+namespace TweetBook.Contracts.V1.Commands.Tags
 {
-    public class CreateTagCommand
+    public class UpdateTagCommand
     {
-        public string TagName { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace TweetBook.Api.Installers
                 .AddEntityFrameworkStores<DataContext>();
 
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ITagService, TagService>();
         }
     }
 }
