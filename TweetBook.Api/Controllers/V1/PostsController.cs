@@ -38,8 +38,8 @@ namespace TweetBook.Controllers.V1
         [HttpGet(TweetBook.Contracts.V1.ApiRoutes.Posts.GetAll)]
         public async Task<IActionResult> GetAll()
         {
-            var querry = new GetAllPostsQuery();
-            var result = await _mediator.Send(querry);
+            var query = new GetAllPostsQuery();
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
