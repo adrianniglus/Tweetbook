@@ -1,24 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using TweetBook.Contracts.V1.Requests;
+using TweetBook.Contracts.V1.Commands.Identity;
 using TweetBook.Contracts.V1.Responses;
 using TweetBook.Infrastructure.DTO;
-using TweetBook.Infrastructure.Services;
 
 namespace TweetBook.Api.Controllers.V1
 {
     public class IdentityController : Controller
     {
-        private readonly IIdentityService _identityService;
+        private readonly IMediator _mediator;
 
-        public IdentityController(IIdentityService identityService)
+        public IdentityController(IMediator mediator)
         {
-            _identityService = identityService;
+            _mediator = mediator;
         }
 
         [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Identity.Register)]
-        public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
+        public async Task<IActionResult> Register([FromBody] UserRegistrationCommand command)
         {
 
             if (!ModelState.IsValid)
@@ -28,26 +28,28 @@ namespace TweetBook.Api.Controllers.V1
                     Errors = ModelState.Values.SelectMany(x => x.Errors.Select(xx => xx.ErrorMessage))
                 });
             }
-            var authResponse = await _identityService.RegisterAsync(request.Email, request.Password);
-            return ValidateAuthResponse(authResponse);
+
+            var result = await _mediator.Send(command);
+
+            return ValidateAuthResponse(result);
         }
 
         
 
         [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Identity.Login)]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
+        public async Task<IActionResult> Login([FromBody] UserLoginCommand command)
         {
-            var authResponse = await _identityService.LoginAsync(request.Email, request.Password);
+            var result = await _mediator.Send(command);
 
-            return ValidateAuthResponse(authResponse);
+            return ValidateAuthResponse(result);
         }
 
         [HttpPost(TweetBook.Contracts.V1.ApiRoutes.Identity.Refresh)]
-        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenCommand command)
         {
-            var authResponse = await _identityService.RefreshTokenAsync(request.Token, request.RefreshToken);
+            var result = await _mediator.Send(command);
 
-            return ValidateAuthResponse(authResponse);
+            return ValidateAuthResponse(result);
 
         }
 
